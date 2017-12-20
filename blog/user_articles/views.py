@@ -11,10 +11,13 @@ def index(request,sort,pindex):
         article_list = Artical.objects.filter().order_by('-click')
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
+    maxpage = article_list.count()/10
     context = {
         'page':page,
         'paginator':paginator,
         'hotest':hotest,
+        'pindex':pindex,
+        'maxpage':maxpage,
     }
     return render(request,'user_articles/index.html',context)
 
@@ -30,11 +33,15 @@ def detail(request,aid):
 def search(request,pindex):
     words = request.GET.get('words')
     article_list = Artical.objects.filter(Q(title__icontains=words)|Q(content__icontains=words))
+    article_num = article_list.count()
+    maxpage = article_num/10
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
     context = {
         'page': page,
         'paginator': paginator,
+        'maxpage':maxpage,
+        'pindex':pindex,
     }
     return render(request, 'user_articles/index.html', context)
 

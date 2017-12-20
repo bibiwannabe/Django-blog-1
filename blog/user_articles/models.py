@@ -5,7 +5,7 @@ class Artical(models.Model):
     title = models.CharField(max_length=20)
     content = HTMLField()
     click = models.IntegerField()
-    createdate = models.DateTimeField(auto_now=True)
+    createdate = models.DateTimeField(auto_now_add=True)
     modifydate = models.DateTimeField(auto_now=True)
     uid = models.ForeignKey('user.UserInfo')
     def __str__(self):

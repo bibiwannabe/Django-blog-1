@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.shortcuts import render,redirect
 from .models import UserInfo
 from hashlib import sha1
@@ -67,11 +68,13 @@ def register_handle(request):
     user.save()
     return redirect('/user/login/')
 
+#用户已经存在
 def register_exist(request):
     username = request.GET.get('username')
     count = models.UserInfo.objects.filter(username=username).count()
     return JsonResponse({'count':count})
 
+#用户信息页展示
 def info(request):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
@@ -84,22 +87,43 @@ def info(request):
     }
     return render(request,'user/detail.html',context)
 
+# 我的文章 展示用户文章列表
 def articles(request,pindex):
     uid = request.COOKIES.get('user_id')
     article_list = Artical.objects.filter(uid=uid).order_by('-createdate')
+    maxpage = article_list.count()/10
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
     context = {
         'page': page,
         'paginator': paginator,
-        'list': 1
+        'pindex': pindex,
+        'maxpage':maxpage,
     }
     return render(request,'user/articles.html',context)
 
+# 展示用户文章内容&修改
 def detail(request,pid):
     article = Artical.objects.get(pk=int(pid))
+    if request.method == "POST":
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
     context = {
         'article':article
     }
     return render(request,'user/userart_detail.html',context)
+
+# 删除文章
+def article_delete(request,aid):
+    try:
+        article = Artical.objects.get(pk=int(aid))
+        article.delete()
+        data = {'ok': 1}
+    except Exception as e:
+        data = {'ok': 0}
+    return render(request,'user/articles.html')
+
+
+
 

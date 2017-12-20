@@ -2,6 +2,7 @@ from django.core.paginator import  Paginator
 from django.shortcuts import render
 from .models import Artical
 from user.models import UserInfo
+from django.db.models import Q
 def index(request,sort,pindex):
     hotest = Artical.objects.filter().order_by('-click')[0:3]
     if sort == 1:
@@ -25,4 +26,15 @@ def detail(request,aid):
         'author':author,
     }
     return render(request,'user_articles/detail.html',context)
+
+def search(request,pindex):
+    words = request.GET.get('words')
+    article_list = Artical.objects.filter(Q(title__icontains=words)|Q(content__icontains=words))
+    paginator = Paginator(article_list, 10)
+    page = paginator.page(int(pindex))
+    context = {
+        'page': page,
+        'paginator': paginator,
+    }
+    return render(request, 'user_articles/index.html', context)
 

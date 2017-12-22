@@ -1,17 +1,22 @@
-from django.core.paginator import  Paginator
+from django.core.paginator import  Paginator,Page
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Artical
 from user.models import UserInfo
 from django.db.models import Q
+
+@csrf_exempt
 def index(request,sort,pindex):
     hotest = Artical.objects.filter().order_by('-click')[0:3]
+    article_list = []
     if sort == 1:
         article_list = Artical.objects.filter().order_by('-modifydate')
     elif sort == 2:
         article_list = Artical.objects.filter().order_by('-click')
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
-    maxpage = article_list.count()/10
+    maxpage = len(article_list)/10
     context = {
         'page':page,
         'paginator':paginator,

@@ -83,7 +83,7 @@ DATABASES = {
         'HOST':'Localhost',
         'USER':'root',
         'PASSWORD':'libiyi',
-        'NAME':'blog',
+        'NAME':'blog1',
     }
 }
 

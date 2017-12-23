@@ -1,12 +1,19 @@
 # coding=utf-8
+import os
+
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect
+
+from blog import settings
 from .models import UserInfo
 from hashlib import sha1
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from user_articles.models import Artical
 from django.core.paginator import Paginator
 from . import models
+
 
 @csrf_exempt
 def login(request):
@@ -92,13 +99,16 @@ def info(request):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
     if request.method == "POST":
-        user.username = request.POST.get('name')
-        user.userpic = request.POST.get('pic')
+        user.username = request.POST.get('username')
+        userpic = request.FILES.get('userpic')
+        path = default_storage.save('user',ContentFile(userpic.read()))
+        user.userpic = os.path.join(settings.MEDIA_ROOT, path)
+        user.useremail = request.POST.get('useremail')
         user.save()
     context = {
         'user':user,
     }
-    return render(request,'user/detail.html',context)
+    return render(request, 'user/info.html', context)
 
 # 我的文章 展示用户文章列表
 def articles(request,pindex):

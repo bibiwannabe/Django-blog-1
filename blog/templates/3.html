@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<title>
+  我的信息
+</title>
+<style type="text/css">
+.nv{
+    border:1px #000 solid;
+	margin:5px 0px 5px 0px;
+	width:600px;
+	 margin:150px auto;
+	  overflow:hidden;
+}
+ .head{
+   float:left;
+  
+   width:200px;
+ }
+ .list_ul figcaption p{
+font-size:12px;
+color:#aaa;
+}
+.head figure div{
+display:inline-block;
+margin:5px auto;
+width:100px;
+height:100px;
+border-radius:100px;
+border:2px solid #fff;
+overflow:hidden;
+-webkit-box-shadow:0 0 3px #ccc;
+box-shadow:0 0 3px #ccc;
+}
+.head img{
+    width:100%;
+     min-height:100%;
+	 text-align:center;
+	 }
+ .rong{
+   width:400px;
+   float:right;
+   text-align:left;
+   margin-top:25px;
+ }
+  .si{
+   margin-top:40px;
+  }
+  .button{
+    margin:50px 0;
+  }
+  .sp{
+   text-align:center;
+  }
+     .tp{
+    text-align:right;
+	position:relative;
+	right:215px;
+   }
+   #s{
+ 
+	 border-bottom:1px solid black;
+	margin:8px;
+   }
+</style>
+</head>
+<body>
+<div class="tp"  >
+          <span>你好，<span>
+	    </div>	
+		<div id="s">
+		</div>
+  <div class="nv"  >
+    <form action="" method="post" role="form" enctype="multipart/form-data">
+    <div class="head">
+	<figure>
+	<div>
+	 <img id="img0" src="img/1.png">
+	</div>
+	 </figure>
+	 <div class="sp">
+	 <input type="file" id="xm" onchange="xmTanUploadImg(this)" accept="image/*"  style="display:none" name="">
+	   <button id="temp">更改图片</button>
+	 </div>
+	</div>
+	<div class="rong">
+	  <span>手机号:13467647(不可修改)</span>
+	  <div class="si">
+	  <span>用户名:</span><br>
+	  <input name="" id="sl" value="13467647">
+	  </div>
+	  <div class="si">
+	     <span>邮箱:</span><br>
+		 <input  id="su" name="">
+	  </div>
+	  <div class="button">
+	    <button type="submit" id="km">保存设置</button>
+		<button type="submit" id="se" style="display:none"></button>
+		<button id="mk"> <a href="1.html">返回主页 </button>
+	  </div>
+	</div>
+    </form>
+  </div>
+   <script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
+	  $(document).ready(function(){
+	    $("#km").on("click",function(){
+		  if(window.confirm('确认保存设置吗')){
+		    
+                 //alert("确定");
+                 return true;
+              }else{
+                 //alert("取消");
+			
+                 return false;
+             }
+		});
+		var jk=$("#sl").val();
+		var su=$("#su").val();
+		$("#mk").on("click",function(){
+		if(($("#xm").val()=='')&&(jk==$("#sl").val())&&(su==$("#su"))){
+		  
+		}
+	   else{ 
+		  if(window.confirm('是否保存设置')){
+		       $("#se").click();
+                 //alert("确定");
+                 return true;
+              }else{
+			  	 window.location.href="1.html";
+                 //alert("取消");
+                 return false;
+             }
+            }		
+		});
+	    $("#temp").on("click",function(){
+		  $("#xm").click();
+	       $("#xm").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) 
+        {
+            $("#img0").attr("src", objUrl);
+        }
+    });
+    function getObjectURL(file) 
+    {
+        var url = null ;
+        if (window.createObjectURL!=undefined) 
+        { // basic
+            url = window.createObjectURL(file) ;
+        }
+        else if (window.URL!=undefined) 
+        {
+             
+            url = window.URL.createObjectURL(file) ;
+        } 
+        else if (window.webkitURL!=undefined) {
+           
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+		});
+	  
+	  });
+	</script>
+</body>
+</html>

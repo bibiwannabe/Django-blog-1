@@ -1,6 +1,7 @@
 # coding=utf-8
 import os
 
+
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
@@ -100,10 +101,8 @@ def info(request):
     user = UserInfo.objects.get(pk=int(uid))
     if request.method == "POST":
         user.username = request.POST.get('username')
-        userpic = request.FILES.get('userpic')
-        path = default_storage.save('user',ContentFile(userpic.read()))
-        user.userpic = os.path.join(settings.MEDIA_ROOT, path)
         user.useremail = request.POST.get('useremail')
+        user.userpic = request.FILES.get('userpic')
         user.save()
     context = {
         'user':user,

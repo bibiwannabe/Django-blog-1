@@ -129,8 +129,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
-MEDIA_ROOT=os.path.join(BASE_DIR,'static')
-
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media').replace('\\', '/')
+MEDIA_URL = '/media/'
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'width': 600,

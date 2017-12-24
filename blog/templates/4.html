@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html>  
+<html>  
+<head>  
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <title>我的文章</title>
-</head>
+   <title>我的文章</title> 
+</head> 
 <style type="text/css">
   .tp{
     text-align:right;
@@ -11,7 +11,7 @@
 	right:215px;
    }
    #s{
-
+ 
 	 border-bottom:1px solid black;
 	margin:8px;
    }
@@ -29,7 +29,7 @@
 }
  #title{
    height:30px;
-
+ 
   }
 .texts span{
    float:left;
@@ -53,15 +53,15 @@ width:215px;
   float:left;
   	padding-top:25px;
 	}
-</style>
-<body>
+</style> 
+<body>  
 <div class="tp"  >
           <span>你好，<span>
-	    </div>
+	    </div>	
 		<div id="s">
 		</div>
  <div class="lk">
-   <form action="/user/userart_{{ article.id }}" method="post" id="nov">
+   <form action="" method="post" id="nov">
    <div class="title">
      <span>文章标题</span>
 	 <input  name="" id="title" size="50">
@@ -73,11 +73,11 @@ width:215px;
    </div>
    <div class="buttons">
     <button type="submit" class="bu">保存</button>
-	<button  class="bu" id="san"  onClick="return false">删除</button>
+	<button  class="bu" id="san"  onClick="return false">删除</button>	
 	</div>
-	<div class="times">
-	   <span>创建时间：{{article.createdate}}</span><br>
-	   <span>最新更新时间：{{article.modifydate}}</span>
+	<div class="times"> 
+	   <span>创建时间：{{createdate}}</span><br>
+	   <span>最新更新时间：{{modifydate}}</span>
 	</div>
 
    </form>
@@ -92,11 +92,11 @@ width:215px;
                  return true;
               }else{
                  //alert("取消");
-
+			
                  return false;
              }
 		});
 	  });
 	  </script>
-</body>
-</html>
+</body>  
+</html> 

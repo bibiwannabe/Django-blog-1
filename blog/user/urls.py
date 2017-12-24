@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^login_handle/$',views.login_handle),
     url(r'^info/$',views.info),
     url(r'^articles_(\d+)/$',views.articles),
+    url(r'^userart_(\d+)/$',views.detail),
             ]+ static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

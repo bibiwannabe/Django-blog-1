@@ -147,6 +147,23 @@ def article_delete(request,aid):
         data = {'ok': 0}
     return render(request,'user/articles.html')
 
+#创建文章
+def create_article(request):
+    return render(request,'user/userart_detail.html')
+
+def creat_handle(request):
+    post = request.POST
+    title = post.get('title')
+    content = post.get('content')
+    article = Artical()
+    article.content = content
+    article.title = title
+    article.save()
+    context = {
+        'article':article,
+    }
+    return redirect('/user/useart_'+str(article.id))
+
 
 
 

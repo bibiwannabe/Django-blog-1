@@ -77,12 +77,12 @@ box-shadow:0 0 3px #ccc;
     <div class="head">
 	<figure>
 	<div>
-	 <img id="img0" name="userpic" src="{{ user.userpic }}">
+	 <img id="img0" name="userpic" src="/static/{{ user.userpic }}">
 	</div>
 	 </figure>
 	 <div class="sp">
 	 <input type="file" id="xm" onchange="xmTanUploadImg(this)" accept="image/*"  style="display:none" name="userpic">
-	   <button id="temp">更改图片</button>
+	   <button id="temp" onclick="return false">更改图片</button>
 	 </div>
 	</div>
 	<div class="rong">
@@ -120,7 +120,7 @@ box-shadow:0 0 3px #ccc;
 		var jk=$("#sl").val();
 		var su=$("#su").val();
 		$("#mk").on("click",function(){
-		if(($("#xm").val()=='')&&(jk==$("#sl").val())&&(su==$("#su"))){
+		if(($("#xm").val()=='')&&(jk==$("#sl").val())&&(su==$("#su").val())){
 
 		}
 	   else{

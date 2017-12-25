@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^register_handle/$',views.register_handle),
     url(r'^login_handle/$',views.login_handle),
     url(r'^info/$',views.info),
-    url(r'^articles_(\d+)/$',views.articles),
+    url(r'^articles_(\d+)_(\d+)/$',views.articles),
     url(r'^userart_(\d+)/$',views.detail),
     url(r'^create/$',views.create_article),
     url(r'^create_handle/$',views.creat_handle),

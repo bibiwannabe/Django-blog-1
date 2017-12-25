@@ -110,12 +110,16 @@ def info(request):
     return render(request, 'user/info.html', context)
 
 # 我的文章 展示用户文章列表
-def articles(request,pindex):
+def articles(request,sort,pindex):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
-    article_list = Artical.objects.filter(uid=user).order_by('-createdate')
+    article_list = []
+    if sort =='1':
+        article_list = Artical.objects.filter(uid=user).order_by('-createdate')
+    if sort =='2':
+        article_list = Artical.objects.filter(uid=user).order_by('-click')
     print(article_list)
-    maxpage = article_list.count()/10+1
+    maxpage = len(article_list)/10+1
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
     context = {

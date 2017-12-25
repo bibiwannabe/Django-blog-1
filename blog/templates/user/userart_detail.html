@@ -61,14 +61,19 @@ width:215px;
 		<div id="s">
 		</div>
  <div class="lk">
-   <form action="/user/userart_{{ article.id }}" method="post" id="nov">
+     {%if create == 1 %}
+    <form action="/user/create_handle/" method="post" id="nov">
+   {% elif create == 0 %}
+   <form action="/user/userart_{{ article.id }}/" method="post" id="nov">
+   {% endif  %}
+    {% csrf_token %}
    <div class="title">
      <span>文章标题</span>
-	 <input  name="" id="title" size="50">
+	 <input  name="title" id="title" size="50" value="{{ article.title }}">
 	 </div>
 	 <div class="texts">
 	 <span>内容</span>
-   <textarea  rows="25" cols="70" name="" form="nov">
+   <textarea  rows="25" cols="70" name="content" form="nov">{{ article.content }}
    </textarea>
    </div>
    <div class="buttons">
@@ -87,7 +92,7 @@ width:215px;
 	  $(document).ready(function(){
 	   $("#san").on("click",function(){
 	     if(window.confirm('确认删除文章吗')){
-		      window.location.href="1.html";
+		      window.location.href="/user/articles_1/";
                  //alert("确定");
                  return true;
               }else{

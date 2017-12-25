@@ -58,7 +58,7 @@ def login_handle(request):
 
 def logout(request):
     request.session.flush()
-    return redirect('/')
+    return redirect('/index_1_1/')
 
 def  register(request):
     context={
@@ -126,14 +126,15 @@ def articles(request,pindex):
 
 # 展示用户文章内容&修改
 @csrf_exempt
-def detail(request,pid):
-    article = Artical.objects.get(pk=int(pid))
+def detail(request,aid):
+    article = Artical.objects.get(pk=int(aid))
     if request.method == "POST":
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
         article.save()
     context = {
-        'article':article
+        'article':article,
+        'create':0,
     }
     return render(request,'user/userart_detail.html',context)
 
@@ -149,7 +150,10 @@ def article_delete(request,aid):
 
 #创建文章
 def create_article(request):
-    return render(request,'user/userart_detail.html')
+    context = {
+        'create':1,
+    }
+    return render(request,'user/userart_detail.html',context)
 
 def creat_handle(request):
     post = request.POST
@@ -158,11 +162,14 @@ def creat_handle(request):
     article = Artical()
     article.content = content
     article.title = title
+    article.click = 0
+    uid = request.session['user_id']
+    article.uid = UserInfo.objects.get(pk=int(uid))
     article.save()
     context = {
         'article':article,
     }
-    return redirect('/user/useart_'+str(article.id))
+    return redirect('/user/userart_'+str(article.id)+'/')
 
 
 

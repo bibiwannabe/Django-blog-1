@@ -6,10 +6,13 @@ from django.conf import settings
 urlpatterns = [
 
     url(r'^login/$', views.login),
+    url(r'^logout/$',views.logout),
     url(r'^register/$',views.register),
     url(r'^register_handle/$',views.register_handle),
     url(r'^login_handle/$',views.login_handle),
     url(r'^info/$',views.info),
     url(r'^articles_(\d+)/$',views.articles),
     url(r'^userart_(\d+)/$',views.detail),
+    url(r'^create/$',views.create_article),
+    url(r'^create_handle/$',views.creat_handle),
             ]+ static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

@@ -175,8 +175,8 @@
 	    </div>
 		<div id="page">
 		   <ul>
-               {% for article in paginator %}
-		   <a href="/article_{{ article.aid }}">
+               {% for article in page %}
+		   <a href="/article_{{ article.id }}/">
 		      <li>
 				 <span>{{article.title }}</span>
 				  <strong>{{ article.createdate }}</strong>
@@ -187,10 +187,10 @@
 		   </ul>
 		</div>
 		<div  class="foot" align="center">
-	      <a href="">上一页</a>
+	      <a href="/index_{{ sort }}_{{ pindex }}/">上一页</a>
 		  <input class="pages" value="{{ pindex }}">
-          <a href="">下一页</a>
-           <span>(共{{ page }}页)</span>
+          <a href="/index_{{ sort }}_{{ pindex}}/">下一页</a>
+           <span>(共{{ maxpage }}页)</span>
 		</div>
 	</div>
   </div>

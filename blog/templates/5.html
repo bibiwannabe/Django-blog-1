@@ -49,30 +49,30 @@ box-shadow:0 0 3px #ccc;
 .nv ul{
 list-style:none;
 margin-top:10px;
-}
+} 
  </style>
 </head>
 <body>
  <div>
     <div class="nv"  >
 	  <div  class="title">
-	    <strong>{{article.title}}</strong>
+	    <strong>{{title}}</strong>
 	  </div>
 	  <div class="infor">
 	   <div class="mim">
 	    <figure>
 	     <div>
-	      <img id="img0" src="/static/{{ author.userpic }}">
+	      <img id="img0" src="img/1.png">
 	     </div>
 	    </figure>
 	   </div>
 	   <ul>
-		<li><span>作者名：{{author.username}}</span></li>
-		<li><span>最新更新日期：{{article.modifydate}}</span></li>
-		<li><span>点击量：{{article.click}}</span></li>
+		<li><span>作者名：{{user.id}}</span></li>
+		<li><span>最新更新日期：{{date}}</span></li>
+		<li><span>点击量：{{ren}}</span></li>
 	   </ul>
      </div>
-	  <textarea  rows="30" cols="82" name="" readonly="readonly"> {{ article.content }}</textarea>
+	  <textarea  rows="30" cols="82" name="" readonly="readonly"> </textarea>
 	</div>
  </div>
 </body>

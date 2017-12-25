@@ -12,7 +12,7 @@
 	right:215px;
    }
    #s{
-
+ 
 	 border-bottom:1px solid black;
 	margin:8px;
    }
@@ -28,12 +28,12 @@
      margin:0px;
 	 padding:0px;
 	 list-style:none;
-
+	 
    }
    #page li{
      border:1px #000 solid;
 	 padding:8px;
-
+     
    }
    .foot{
       float:center;
@@ -67,7 +67,7 @@
 	    </div>
 		<div class="tp" style="display:none;">
           <span>你好，<span>
-	    </div>
+	    </div>	
 		<div id="s">
 		</div>
 	</div>
@@ -81,21 +81,37 @@
    </div>
   		<div id="page">
 		   <ul>
-               {% for article in page %}
-		   <a href="/article_{{ article.id }}/">
+		   <a href="">
 		      <li>
-				 <span>{{ article.title }}</span>
-				  <strong>{{ article.modifydate }}/strong>
+				 <span>mizi</span> 
+				  <strong>time</strong>
 			  </li>
 			  </a>
-               {% endfor %}
+			<a href="">
+		      <li>
+				  <span>title</span> 
+				  <strong>time</strong>	
+			  </li>
+			  </a>
+			 <a href="">
+		      <li>    
+				  <span>title</span> 
+				  <strong>time</strong>		
+			  </li>
+			  </a>
+			 <a href="">
+		      <li>			    
+				  <span>title</span> 
+				  <strong>time</strong>
+			  </li>
+			  </a>
 		   </ul>
 		</div>
 		<div  class="foot" align="center">
 	      <a href="">上一页</a>
 		  <input class="pages">
-          <a href="">下一页</a>
-           <span>(共几页)</span>
+          <a href="">下一页</a>	
+           <span>(共几页)</span>		  
 		</div>
  </div>
 </body>

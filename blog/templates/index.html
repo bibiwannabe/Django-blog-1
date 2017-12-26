@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE HTML>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -195,24 +194,12 @@
 		   </ul>
 		</div>
 		<div  class="foot" align="center">
-	      <a href="javascript:void(0)" class="last">上一页</a>
+	      <a href="/index_{{ sort }}_{{ pindex }}/">上一页</a>
 		  <input class="pages" value="{{ pindex }}">
-          <a href="javascript:void(0)"  class="next">下一页</a>
+          <a href="/index_{{ sort }}_{{ pindex}}/">下一页</a>
            <span>(共{{ maxpage }}页)</span>
 		</div>
 	</div>
-		<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
-    <script>
-	    $(document).ready(function(){
-		   $(".last").on("click",function(){
-		    var page={{pindex}}-1;
-		     window.location.href="/index_{{ sort }}_"+page+"/";
-		   });
-		   $(".next").on("click",function(){
-		      var pag={{pindex}}+1;
-		     window.location.href="/index_{{ sort }}_"+pag+"/";
-		   });
-		});
-	    </script>
+  </div>
 </body>
 </html>

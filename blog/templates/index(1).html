@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE HTML>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -203,16 +202,16 @@
 	</div>
 		<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
     <script>
-	    $(document).ready(function(){
+	    $(document).ready(function(){ 
 		   $(".last").on("click",function(){
 		    var page={{pindex}}-1;
 		     window.location.href="/index_{{ sort }}_"+page+"/";
 		   });
 		   $(".next").on("click",function(){
-		      var pag={{pindex}}+1;
+		    var pag={{pindex}}+1;
 		     window.location.href="/index_{{ sort }}_"+pag+"/";
 		   });
 		});
-	    </script>
+  </div>
 </body>
 </html>

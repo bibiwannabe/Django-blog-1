@@ -52,6 +52,7 @@ def search(request,pindex):
         'paginator': paginator,
         'maxpage':maxpage,
         'pindex':pindex,
+        'words':words,
     }
-    return render(request, 'user_articles/index.html', context)
+    return render(request, 'user_articles/search.html', context)
 

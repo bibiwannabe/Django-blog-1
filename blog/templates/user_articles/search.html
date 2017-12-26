@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <head>
+
+   <title>
+     搜索
+   </title>
+   <style type="text/css">
+   .sw{
+   	  width:800px;
+   margin:  auto;
+   }
+   .nv{
+      border:1px #000 solid;
+	margin:5px 0px 5px 0px;
+
+   }
+    .nv ul{
+     margin:0px;
+	 padding:0px;
+	 list-style:none;
+
+   }
+   .nv li{
+     border:1px #000 solid;
+	 padding:8px;
+
+   }
+   .po{
+     height:30px;
+	 width:400px;
+
+   }
+   .fom{
+    overflow:hidden;
+   }
+   .input{
+   float:left;
+   width:430px;
+
+   }
+   </style>
+ </head>
+ <body>
+
+ <div class="sw">
+ <div class="fom">
+   <form action="/search_1/"  method="get" class="foe">
+       {% csrf_token %}
+   <div class="input">
+     <input placeholder="搜索关键字" name="words" class="po" value="{{words}}">
+	 </div>
+	 <div class="ip">
+	 <button style="display:none" class="ty"> </button>
+	  <a href="javascript:void(0)" class="ssd">
+	  <img width="60px" height="36px" src="/static/images/search.png"></img>
+	 </a>
+	 </div>
+   </form>
+ </div>
+ <script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
+	    $(document).ready(function(){
+		  $(".ssd").on("click",function(){
+		    $(".ty").click();
+
+
+		  });
+
+
+		});
+	</script>
+   <div class="nv">
+      <ul>
+          {% for article in page %}
+		   <a href="/article_{{ article.id }}/">
+		      <li>
+				 <span>{{ article.title }}</span>
+				  <strong>{{ article.modifydate }}</strong>
+			  </li>
+		    </a>
+    {%empty%}
+        <li>啥也没找到</li>
+    {%endfor%}
+		   </ul>
+   </div>
+   <div  class="foot" align="center">
+	      <a href="">上一页</a>
+		  <input class="pages" value="{{ pindex }}">
+          <a href="">下一页</a>
+           <span>(共几页)</span>
+		</div>
+</div>
+ </body>
+</html>

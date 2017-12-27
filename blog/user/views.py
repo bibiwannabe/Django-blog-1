@@ -1,12 +1,10 @@
 # coding=utf-8
 import os
-
-
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect
-
+from .import login_decorator
 from blog import settings
 from .models import UserInfo
 from hashlib import sha1
@@ -96,6 +94,7 @@ def register_exist(request):
     return JsonResponse({'count':count})
 
 #用户信息页展示
+@login_decorator.login
 def info(request):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
@@ -110,6 +109,7 @@ def info(request):
     return render(request, 'user/info.html', context)
 
 # 我的文章 展示用户文章列表
+@login_decorator.login
 def articles(request,sort,pindex):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
@@ -130,6 +130,7 @@ def articles(request,sort,pindex):
     return render(request,'user/articles.html',context)
 
 # 展示用户文章内容&修改
+@login_decorator.login
 @csrf_exempt
 def detail(request,aid):
     article = Artical.objects.get(pk=int(aid))
@@ -144,6 +145,7 @@ def detail(request,aid):
     return render(request,'user/userart_detail.html',context)
 
 # 删除文章
+@login_decorator.login
 def article_delete(request,aid):
     try:
         article = Artical.objects.get(pk=int(aid))
@@ -154,12 +156,14 @@ def article_delete(request,aid):
     return render(request,'user/articles.html')
 
 #创建文章
+@login_decorator.login
 def create_article(request):
     context = {
         'create':1,
     }
     return render(request,'user/userart_detail.html',context)
 
+@login_decorator.login
 def creat_handle(request):
     post = request.POST
     title = post.get('title')

@@ -85,7 +85,7 @@
 		   <a href="/user/userart_{{ article.id }}/">
 		      <li>
 				 <span>{{ article.title }}</span>
-				  <strong>{{ article.modifydate }}/strong>
+				  <strong>{{ article.modifydate|date:"Y-m-d H:i:s"  }}/strong>
 			  </li>
 			  </a>
                {% endfor %}

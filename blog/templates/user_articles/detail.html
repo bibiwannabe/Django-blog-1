@@ -68,7 +68,7 @@ margin-top:10px;
 	   </div>
 	   <ul>
 		<li><span>作者名：{{author.username}}</span></li>
-		<li><span>最新更新日期：{{article.modifydate}}</span></li>
+		<li><span>最新更新日期：{{article.modifydate|date:"Y-m-d H:i:s" }}</span></li>
 		<li><span>点击量：{{article.click}}</span></li>
 	   </ul>
      </div>

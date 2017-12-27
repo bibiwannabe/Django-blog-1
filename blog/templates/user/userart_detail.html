@@ -81,8 +81,8 @@ width:215px;
 	<button  class="bu" id="san"  onClick="return false">删除</button>
 	</div>
 	<div class="times">
-	   <span>创建时间：{{article.createdate}}</span><br>
-	   <span>最新更新时间：{{article.modifydate}}</span>
+	   <span>创建时间：{{article.createdate|date:"Y-m-d H:i:s" }}</span><br>
+	   <span>最新更新时间：{{article.modifydate|date:"Y-m-d H:i:s" }}</span>
 	</div>
 
    </form>

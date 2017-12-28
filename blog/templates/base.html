@@ -1,11 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-{% block header %}{% endblock header%}
 <head>
-     <title>
-   {{ title }}
- </title>
   <style type="text/css">
   .op{
     text-align:right;
@@ -13,7 +9,7 @@
 	right:215px;
    }
    #s{
-
+ 
 	 border-bottom:1px solid black;
 	margin:8px;
    }
@@ -33,56 +29,53 @@
 	.bn li{
 	 border:1px #000 solid;
 	 padding:8px;
-
+	
 	}
-    {%block head%}{%endblock head%}
   </style>
-
 </head>
   <body>
   <div  class="qw">
         <div class="op" style="display:blcok">
-	      <a href="2.html">请登录/注册</a>
+	      <a href="/user/login/">请登录/注册</a>
 	    </div>
 		<div class="op" style="display:none;">
-          <span>你好，<span>
-	    </div>
+          <span>你好，{{ request.session.user_name }}<span>
+	    </div>	
 		<div id="s">
 		</div>
 		<div class="bn"  style="display:none">
 	   <ul>
-	   <a  href="3.html">
+	   <a  href="/user/info/">
 	     <li>我的信息</li>
 		 </a>
-		  <a  href="4.html">
+		  <a  href="/user/articles_1_1/">
 		 <li>我的文章</li></a>
-		  <a  href="4.html">
+		  <a  href="/user/create/">
 		 <li>新建文章</li></a>
-		 <a href="1.html">
+		 <a href="/user/logout/">
 		 <li>退出</li></a>
 	   </ul>
-
+	   
 	</div>
 	</div>
-  {% block body%}{%endblock body%}
-
-        {% block script %}
+	<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
 	    $(document).ready(function(){
-		  if($session.get['user_id']==null){
+		  if({{request.session.user_id}}==null){
 
-
+		  
 		  }
 		  else{
 		    $(".op").hide();
 			$(".op").eq(1).show();
-			var hj="<span>你好,"+$session().get['user_id']+"</span>";
+			var hj="<span>你好,"+"{{request.session.user_name}}"+"</span>";
 			$(".op  span").html(hj);
 			$(".bn").show();
-
+		  
 		  }
-
-
+		
+		
 		});
-        {% endblock script %}
+	</script>
   </body>
 </html>

@@ -1,3 +1,4 @@
+{% include "base.html" %}
 <!DOCTYPE HTML>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -66,11 +67,6 @@ box-shadow:0 0 3px #ccc;
 </style>
 </head>
 <body>
-<div class="tp"  >
-          <span>你好，<span>
-</div>
-		<div id="s">
-		</div>
   <div class="nv"  >
     <form action="/user/info/" method="post" role="form" enctype="multipart/form-data">
         {% csrf_token %}

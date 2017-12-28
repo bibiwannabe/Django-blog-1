@@ -183,7 +183,7 @@ def creat_handle(request):
     return redirect('/user/userart_'+str(article.id)+'/')
 
 def head(request):
-    return render(request,'8.html')
+    return render(request, 'base.html')
 
 
 

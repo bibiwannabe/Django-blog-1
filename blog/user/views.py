@@ -34,13 +34,13 @@ def login_handle(request):
     users = UserInfo.objects.filter(userphone=userphone)
     if len(users) == 1:
         print(userphone)
-       # s1 = sha1()
+       # s1 = sha1()#此部分可用于用户密码加密
         #s1.update(str(userpassword).encode('utf-8'))
         #s1.hexdigest()
         if userpassword == users[0].userpassword:
             url = request.COOKIES.get('url', '/')  # 从cookie中取出url完整路径参照user_decorator
             request.session['user_id'] = users[0].id  # 用于user_decorator传用户id验证是否登录
-            request.session['userphone'] = userphone
+            request.session['user_name'] = users[0].username #用于显示导航栏‘欢迎您，{{request.session.user_name}}’
             print('ss')
             context = 0
             return HttpResponse(context)
@@ -53,11 +53,12 @@ def login_handle(request):
         print(context)
         return HttpResponse(context)
 
-
+#退出登录 返回主页
 def logout(request):
     request.session.flush()
     return redirect('/index_1_1/')
 
+#注册
 def  register(request):
     context={
         'register':1,
@@ -94,7 +95,7 @@ def register_exist(request):
     return JsonResponse({'count':count})
 
 #用户信息页展示
-@login_decorator.login
+@login_decorator.login#此为位于login_decorator.py下的验证登录装饰器 用于防止用户登陆之前访问到可修改信息的界面
 def info(request):
     uid = request.session['user_id']
     user = UserInfo.objects.get(pk=int(uid))
@@ -163,6 +164,7 @@ def create_article(request):
     }
     return render(request,'user/userart_detail.html',context)
 
+#创建文章操作
 @login_decorator.login
 def creat_handle(request):
     post = request.POST
@@ -179,6 +181,9 @@ def creat_handle(request):
         'article':article,
     }
     return redirect('/user/userart_'+str(article.id)+'/')
+
+def head(request):
+    return render(request,'8.html')
 
 
 

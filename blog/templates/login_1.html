@@ -1,0 +1,376 @@
+
+<!DOCTYPE HTML>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+
+ <title>
+   登录
+ </title>
+ <style type="text/css">
+  .nav{
+     width:350px;
+	 border:1px #000 solid;
+	   margin:150px auto;
+	   background-color:#E6EFFB;
+  }
+  h4{
+    text-align:center;
+	margin:10px;
+  }
+  #flod{
+  	 border-bottom:1px solid black;
+  }
+
+  .phone{
+    padding:15px 0;
+  }
+  .mima{
+    padding-bottom:15px;
+  }
+  .yan{
+   height:70px;
+  }
+
+  .kp{
+    padding-bottom:10px;
+  }
+  .right{
+    float:right;
+  }
+  .left{
+    float:left;
+  }
+  #ttable{
+   padding:5px 0 0 0;
+   text-align:center;
+  }
+ .form-group{
+   overflow:auto;
+
+ }
+.clearUl:after {
+content:"";
+display: block;
+clear: both;
+}
+.ss{
+  padding-top:10px;
+}
+.wrong{
+  color:red;
+  text-align:center;
+  position:relative;
+  right:26px;
+}
+.phone1{
+  padding-bottom:15px;
+}
+.phone2{
+  padding:15px 0;
+  margin:0px;
+}
+.mima1{
+  padding-bottom:15px;
+  margin-bottom:0;
+}
+ </style>
+
+</head>
+<body>
+<div class="nav " >
+   <h4 class="io" style="display:block">登录</h4>
+   <h4 class="iu" style="display:none">注册</h4>
+
+   <div id="flod">
+   </div>
+  <form id="loginForms" class="form-horizontal" method="post" name="loginForm" role="form" action="" onsubmit="return false">
+    {% csrf_token %}
+      <div class="wrong" style="display:none">
+	 <span>*  手机号不能为空</span>
+	</div>
+	<div class="wrong" style="display:none">
+	 <span>*  手机号格式错误</span>
+	</div>
+	<div class="phone form-group s">
+	  <label for="firstname" class="col-sm-3 control-label" id="ttable">手机号</label>
+	  <div class="col-sm-8">
+	  <input type="text" class="form-control" id="phone" placeholder="请输入手机号">
+	  </div>
+	</div>
+	<div class="wrong" style="display:none">
+	  <span>*密码不能为空</span>
+	</div>
+	<div class="wrong" style="display:none">
+	  <span>*   密码格式错误</span>
+	</div>
+
+	<div class="mima form-group a" >
+      <label for="firstname" class="col-sm-3 control-label" id="ttable">密码</label>
+	  	  <div class="col-sm-8 ">
+	  <input type="text" class="form-control" id="mima" placeholder="请输入密码">
+	  </div>
+	</div>
+	<div class="wrong" style="display:none" >
+	  <span>*验证码不能为空</span>
+	</div>
+	<div class="wrong" style="display:none" >
+	  <span>*验证码错误</span>
+	</div>
+	<div class="yan form-group">
+	   <label for="firstname" class="col-sm-3 control-label" id="ttable">验证码</label>
+	  <div class="col-sm-4 ">
+	  <input type="text" class="form-control" id="yan" placeholder="请输入验证码">
+	  </div>
+	  <div class="col-sm-5">
+	  <canvas id="canvas" width="120" height="45"></canvas>
+	  <a href="#" id="changeImg">看不清，换一张</a>
+	  </div>
+
+	</div>
+	<div class="wrong" style="display:none" >
+	  <span>*确认密码不能为空</span>
+	</div>
+	<div class="wrong" style="display:none" >
+	  <span>*与密码与不同</span>
+	</div>
+	<div class="kp form-group">
+      <label for="firstname" class="col-sm-3 control-label" id="ttable">确认密码</label>
+      <div class="col-sm-8 ">
+	  <input type="text" class="form-control"  id='kp' placeholder="确认密码">
+       </div>
+ 	</div>
+	<div class="ss form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+    <button type="submit" id="login" class="btn btn-default"><a href="javascript:void(0)">登录</a></button>
+	<button class="btn btn-default"><a href="/user/register/?register=1">去注册</a></button>
+	</div>
+	</div>
+	<div class="tp form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+	 <button type="submit" class="btn btn-default" id="zhuce">注册</button>
+	 <button class="btn btn-default"><a href="/user/login/">去登录</a></button>
+	 </div>
+	</div>
+  </form>
+  </div>
+    <script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
+	 $(document).ready(function(){
+	    $("#zhuce").on("click",function(){
+	     var phone=$('#phone').val();
+	   var  mima=$('#mima').val();
+	   var kp=$('#kp').val();
+	   if ( phone== ""){
+		    $(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(0).show();
+		}else if(mima==''){
+		   $(".s").removeClass("phone");
+			$(".s").addClass("phone2");
+			$(".wrong").hide();
+			$(".wrong").eq(2).show();
+		}else if(kp==''){
+		  $(".a").removeClass("mima");
+			$(".a").addClass("mima1");
+			$(".wrong").hide();
+			$(".wrong").eq(6).show();
+	  }else if(!/^1[34578]\d{9}$/.test(phone)){
+		$(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(1).show();
+		}else  if(!/^\w{6,20}$/.test(mima)){
+		 $(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(3).show();
+		}else if(mima!=kp){
+		   $(".a").removeClass("mima");
+			$(".a").addClass("mima1");
+			$(".wrong").hide();
+			$(".wrong").eq(7).show() ;
+		}else{
+		 $.ajax({
+		  type:"POST",
+		  url:'/user/register_handle/',
+		  cache:false,
+          async:false,
+		  data:{
+		  'phone':phone,
+		  'password':mima
+		  },
+		  success:function(result){
+		   if(result==0){
+		    window.location.href="/user/login/";
+
+		   }
+ 	     else{
+		     alert("注册失败");
+		  }
+ 		  }
+		});
+		}
+
+	 });
+	 });
+
+   $(document).ready(function(){
+	 function getUrlParam(name)
+     {
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+     if (r!=null) return unescape(r[2]); return null; //返回参数值
+     }
+	      var io=$('.io');
+		  var register=getUrlParam('register');
+		  if(register==1){
+		    io.hide();
+			$('.iu').show();
+			$('.yan').hide();
+			$('.kp').show();
+			$('.ss').hide();
+			$('.tp').show();
+		  }else{
+		   io.show();
+		   $('.iu').hide();
+		   $('.yan').show();
+		   $('.kp').hide();
+		   $('.ss').show();
+			$('.tp').hide();
+		  }
+  });
+     $(document).ready(function(){
+	   function randomNum(min,max){
+    return Math.floor( Math.random()*(max-min)+min);
+  }
+  /**生成一个随机色**/
+  function randomColor(min,max){
+    var r = randomNum(min,max);
+    var g = randomNum(min,max);
+    var b = randomNum(min,max);
+    return "rgb("+r+","+g+","+b+")";
+  }
+  var ki="";
+  drawPic();
+  $("#changeImg").on("click",function(e){
+      e.preventDefault();
+      drawPic();
+
+  });
+  function drawPic(){
+    var canvas=document.getElementById("canvas");
+    var width=canvas.width;
+    var height=canvas.height;
+    var ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'bottom';
+
+    /**绘制背景色**/
+    ctx.fillStyle = randomColor(180,240); //颜色若太深可能导致看不清
+    ctx.fillRect(0,0,width,height);
+	  ki="";
+    /**绘制文字**/
+    var str = 'ABCEFGHJKLMNPQRSTWXY123456789';
+    for(var i=0; i<4; i++){
+      var txt = str[randomNum(0,str.length)];
+      ctx.fillStyle = randomColor(50,160);  //随机生成字体颜色
+      ctx.font = randomNum(15,40)+'px SimHei'; //随机生成字体大小
+      var x = 10+i*25;
+      var y = randomNum(25,45);
+      var deg = randomNum(-45, 45);
+      //修改坐标原点和旋转角度
+      ctx.translate(x,y);
+      ctx.rotate(deg*Math.PI/180);
+      ctx.fillText(txt, 0,0);
+      //恢复坐标原点和旋转角度
+      ctx.rotate(-deg*Math.PI/180);
+      ctx.translate(-x,-y);
+	  ki+=txt;
+    }
+    /**绘制干扰线**/
+    for(var i=0; i<8; i++){
+      ctx.strokeStyle = randomColor(40,180);
+      ctx.beginPath();
+      ctx.moveTo( randomNum(0,width), randomNum(0,height) );
+      ctx.lineTo( randomNum(0,width), randomNum(0,height) );
+      ctx.stroke();
+    }
+    /**绘制干扰点**/
+    for(var i=0; i<100; i++){
+      ctx.fillStyle = randomColor(0,255);
+      ctx.beginPath();
+      ctx.arc(randomNum(0,width),randomNum(0,height), 1, 0, 2*Math.PI);
+      ctx.fill();
+    }
+  }
+
+  $("#login").on("click",function(){
+      var phone=$('#phone').val();
+      var  mima=$('#mima').val();
+	   var yan=$('#yan').val();
+	    if ( phone== ""){
+		    $(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(0).show();
+		}else if(mima==''){
+		   $(".s").removeClass("phone");
+			$(".s").addClass("phone2");
+			$(".wrong").hide();
+			$(".wrong").eq(2).show();
+		}else if(yan==''){
+		  $(".a").removeClass("mima");
+			$(".a").addClass("mima1");
+			$(".wrong").hide();
+			$(".wrong").eq(4).show();
+		}else if(!/^1[34578]\d{9}$/.test(phone)){
+		$(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(1).show();
+		}else  if(!/^\w{6,20}$/.test(mima)){
+		 $(".s").removeClass("phone");
+			$(".s").addClass("phone1");
+			$(".wrong").hide();
+			$(".wrong").eq(3).show();
+ 		}else if(yan.toLowerCase()!=ki.toLowerCase()){
+
+		  $(".a").removeClass("mima");
+			$(".a").addClass("mima1");
+			$(".wrong").hide();
+			$(".wrong").eq(5).show();
+		}else{
+	    $.ajax({
+		  type:"POST",
+		  url:'/user/login_handle/',
+		  cache:false,
+          async:false,
+		  data:{
+		  'phone':phone,
+		  'password':mima
+		  },
+		  success:function(result){
+		   if(result==1){
+		     alert("手机号不存在");
+
+		   }
+ 	      if(result==2){
+		     alert("密码错误")
+		  }if(result==0) {
+		   window.location.href="/index_1_1/";
+		  }
+ 		  }
+		});
+		}
+		});
+
+
+	 });
+  </script>
+</body>
+</html>

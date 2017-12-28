@@ -5,8 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Artical
 from user.models import UserInfo
 from django.db.models import Q
-
-@csrf_exempt
+#主页页面返回最热四条信息以及所有文章列表按热门、最新两种排序
+@csrf_exempt#此为防止前端post信息出现权限错误
 def index(request,sort,pindex):
     hotest = Artical.objects.filter().order_by('-click')[0:3]
     article_list = []
@@ -28,6 +28,7 @@ def index(request,sort,pindex):
     }
     return render(request,'user_articles/index.html',context)
 
+#其他用户访问文章详细页面不能更改
 def detail(request,aid):
     article = Artical.objects.get(pk=int(aid))
     user = article.uid
@@ -40,6 +41,7 @@ def detail(request,aid):
     }
     return render(request,'user_articles/detail.html',context)
 
+#主页搜索之后返回‘search.html’
 def search(request,pindex):
     words = request.GET.get('words')
     article_list = Artical.objects.filter(Q(title__icontains=words)|Q(content__icontains=words))

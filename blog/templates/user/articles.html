@@ -12,17 +12,13 @@
 	position:relative;
 	right:215px;
    }
-   #s{
 
-	 border-bottom:1px solid black;
-	margin:8px;
-   }
   .title{
   width:800px;
    margin:  auto;
  }
      #page{
-     border:1px #000 solid;
+     border:1px #ddd solid;
 	margin:5px 0px 5px 0px;
    }
    #page ul{
@@ -32,9 +28,23 @@
 
    }
    #page li{
-     border:1px #000 solid;
-	 padding:8px;
-
+     border:1px #ddd solid;
+	 padding:15px 8px 5px 8px;
+       height: 30px;
+     overflow:hidden;
+   }
+    #page li span{
+   float:left;
+   }
+   #page li a{
+     color:#320;
+	 float:left;
+   }
+   #page li em{
+    color:#81aad6;
+	float:right;
+	height:12px;
+	line-height:12px;
    }
    .foot{
       float:center;
@@ -59,35 +69,80 @@
 	 text-align:center;
 	 width:50px;
    }
+
+   .we{
+       color: #888;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+	    padding: 3px 6px;
+		margin: 8px;
+  }
+  .next{
+  height:22px;
+  width:16px;
+  display:inline-block;
+  padding-bottom:0px;
+  padding-top:0px;
+
+  }
+
   </style>
+
+
 </head>
 <body>
  <div class="title">
 
    <div class="ni">
      <ul>
-	   <li> <a href="javascript:void(0)">时间</a></li>
-	   <li> <a href="javascript:void(0)">热度</a></li>
+	   <li> <a href="/user/articles_1_1/">时间</a></li>
+	   <li> <a href="/user/articles_2_1/">热度</a></li>
 	 </ul>
    </div>
   		<div id="page">
 		   <ul>
                {% for article in page %}
-		   <a href="/user/userart_{{ article.id }}/">
+
 		      <li>
-				 <span>{{ article.title }}</span>
-				  <strong>{{ article.modifydate|date:"Y-m-d H:i:s"  }}/strong>
+                <span >{{dian}}</span>
+			  <a href="/user/userart_{{ article.id }}/">
+				 <span>{{ article.title }}
+				 </a>
+				   <em>{{ article.createdate|date:"Y-m-d"  }}</em>
+
 			  </li>
-			  </a>
+
                {% endfor %}
 		   </ul>
 		</div>
 		<div  class="foot" align="center">
-	      <a href="">上一页</a>
-		  <input class="pages">
-          <a href="">下一页</a>
-           <span>(共几页)</span>
+	     <a href="javascript:void(0)" class="last we"> &laquo; </a>
+		 <input class="pages" value="{{ pindex }}">
+         <a href="javascript:void(0)"  class=" we next">&raquo;</a>
+           <span>(共{{maxpage}}页)</span>
 		</div>
  </div>
+ 	<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
+	    $(document).ready(function(){
+
+		    if({{maxpage}}=={{pindex}}){
+			    $(".next").hide();
+			}else if({{pindex}}==1){
+			   $(".last").hide();
+			}
+			else{
+			}
+		   $(".last").on("click",function(){
+		    var page={{pindex}}-1;
+		     window.location.href="/user/article_{{ sort }}_"+page+"/";
+		   });
+		   $(".next").on("click",function(){
+		      var pag={{pindex}}+1;
+		     window.location.href="/user/article_{{ sort }}_"+pag+"/";
+		   });
+		});
+	    </script>
 </body>
 </html>

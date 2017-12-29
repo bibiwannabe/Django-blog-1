@@ -2,6 +2,7 @@
 import os
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
+import math
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect
 from .import login_decorator
@@ -120,7 +121,7 @@ def articles(request,sort,pindex):
     if sort =='2':
         article_list = Artical.objects.filter(uid=user).order_by('-click')
     print(article_list)
-    maxpage = len(article_list)/10+1
+    maxpage = math.ceil(len(article_list)/10)
     paginator = Paginator(article_list, 10)
     page = paginator.page(int(pindex))
     context = {

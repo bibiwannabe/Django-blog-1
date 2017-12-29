@@ -1,3 +1,4 @@
+
 {% include "base.html" %}
 <!DOCTYPE HTML>
 <html>
@@ -8,12 +9,12 @@
      搜索
    </title>
    <style type="text/css">
-   .sw{
+      .sw{
    	  width:800px;
    margin:  auto;
    }
    .nv{
-      border:1px #000 solid;
+      border:1px #ddd solid;
 	margin:5px 0px 5px 0px;
 
    }
@@ -24,7 +25,7 @@
 
    }
    .nv li{
-     border:1px #000 solid;
+     border:1px #ddd solid;
 	 padding:8px;
 
    }
@@ -41,6 +42,42 @@
    width:430px;
 
    }
+   .ip{
+     float:left;
+     overflow:hidden;
+   }
+   .ty{
+     width:80px;
+	 height:36px;
+	 background-color:#B0B0B0;
+	 float:left;
+   }
+   .ssd{
+     position:absolute;
+	 right:625px;
+	 top:60px;
+   }
+       .we{
+       color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+	    padding: 3px 6px;
+		margin: 8px;
+  }
+  .next{
+  height:22px;
+  width:16px;
+  display:inline-block;
+  padding-bottom:0px;
+  padding-top:0px;
+
+  }
+  .pages{
+   height:24px;
+  width:30px;
+
+  }
    </style>
  </head>
  <body>
@@ -53,9 +90,9 @@
      <input placeholder="搜索关键字" name="words" class="po" value="{{words}}">
 	 </div>
 	 <div class="ip">
-	 <button style="display:none" class="ty"> </button>
+	 <button  class="ty"> </button>
 	  <a href="javascript:void(0)" class="ssd">
-	  <img width="60px" height="36px" src="/static/images/search.png"></img>
+	  <img width="30px" height="30px" src="/static/images/search.png"></img>
 	 </a>
 	 </div>
    </form>
@@ -75,23 +112,46 @@
    <div class="nv">
       <ul>
           {% for article in page %}
-		   <a href="/article_{{ article.id }}/">
+
 		      <li>
-				 <span>{{ article.title }}</span>
-				  <strong>{{ article.modifydate }}</strong>
+			  <span>{{dian}}</span>
+			  <a href="/article_{{ article.id }}/">
+				 {{ article.title }}
+				 </a>
+				  <em>{{ article.modifydate|date:"Y-m-d" }}</em>
 			  </li>
-		    </a>
+
     {%empty%}
         <li>啥也没找到</li>
     {%endfor%}
 		   </ul>
    </div>
    <div  class="foot" align="center">
-	      <a href="">上一页</a>
+	      <a href="javascript:void(0)" class="last we">&laquo;</a>
 		  <input class="pages" value="{{ pindex }}">
-          <a href="">下一页</a>
-           <span>(共几页)</span>
+          <a href="javascript:void(0)"  class=" we next">&raquo;</a>
+           <span>(共{{ maxpage }}页)</span>
 		</div>
 </div>
+<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
+    <script>
+	    $(document).ready(function(){
+		   if({{maxpage}}=={{pindex}}){
+			    $(".next").hide();
+			}else if({{pindex}}==1){
+			   $(".last").hide();
+			}
+			else{
+			}
+			 $(".last").on("click",function(){
+		    var page={{pindex}}-1;
+		     window.location.href="/index_"+page+"/?words={{ words }}";
+		   });
+		   $(".next").on("click",function(){
+		      var pag={{pindex}}+1;
+		     window.location.href="/search_"+pag+"/?words={{ words }}";
+		   });
+		});
+		</script>
  </body>
 </html>

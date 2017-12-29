@@ -3,23 +3,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <head>
   <style type="text/css">
+  .qw{
+    overflow:hidden;
+  }
   .op{
     text-align:right;
 	position:relative;
 	right:215px;
+margin-top:15px;
    }
    #s{
- 
-	 border-bottom:1px solid black;
+       border-bottom:1px solid #ddd;
 	margin:8px;
+       margin-top: 0px;
+
    }
    .bn{
-    border:1px #000 solid;
+    border:1px #ddd solid;
 	margin:5px 0px 5px 0px;
 	width:100px;
 	position:fixed;
-	top:35px;
-	right:100px;
+	top:59px;
+	right:131px;
 	}
 	.bn ul{
 	margin:0px;
@@ -27,22 +32,73 @@
 	 list-style:none;
 	}
 	.bn li{
-	 border:1px #000 solid;
+
 	 padding:8px;
-	
+
 	}
+	.wi{
+	 position:absolute;
+	 left:80px;
+	 top:7px;
+	}
+	.wi a{
+display:inline-block;
+	height:30px;
+	width:40px;
+	}
+  .wi span{
+	    height: 45px;
+    line-height: 45px;
+    color: #333;
+    width: 40px;
+    position: absolute;
+    left: 45px;
+    top: 0px;
+    font-size: large;
+    font-weight: bolder;
+	}
+	a{
+	outline:none;
+	}
+      .qw{
+
+          background-color: #eee;
+    height: 50px;
+      }
+      body{
+          margin: 0px;
+      }
+         a:link {
+ text-decoration: none;
+}
+a:visited {color: #4191E0}
+   a:hover{
+     color:FF2400;
+   }
   </style>
+
+
+
+
 </head>
   <body>
   <div  class="qw">
+       <div class="wi" >
+	     <a href="/index_1_1/">
+
+		  <img src="/static/images/logo.png" width="40px" height="40px">
+		  </a>
+           <a href="/index_1_1/"><span>博客</span></a>
+	   </div>
         <div class="op" style="display:blcok">
+
 	      <a href="/user/login/">请登录/注册</a>
+
 	    </div>
 		<div class="op" style="display:none;">
           <span>你好，{{ request.session.user_name }}<span>
 	    </div>	
-		<div id="s">
-		</div>
+
 		<div class="bn"  style="display:none">
 	   <ul>
 	   <a  href="/user/info/">
@@ -58,6 +114,8 @@
 	   
 	</div>
 	</div>
+  <div id="s">
+		</div>
 	<script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
     <script>
 	    $(document).ready(function(){

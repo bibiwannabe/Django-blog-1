@@ -13,6 +13,8 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from user_articles.models import Artical
 from django.core.paginator import Paginator
 from . import models
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 
 @csrf_exempt
@@ -131,31 +133,27 @@ def articles(request,sort,pindex):
     }
     return render(request,'user/articles.html',context)
 
-# 展示用户文章内容&修改
+# 展示用户文章内容&修改&删除
 @login_decorator.login
 @csrf_exempt
 def detail(request,aid):
     article = Artical.objects.get(pk=int(aid))
     if request.method == "POST":
-        article.title = request.POST.get('title')
-        article.content = request.POST.get('content')
-        article.save()
+        print('2')
+        if request.POST.get('delete'):
+            print('1')
+            article.delete()
+            return redirect('/user/articles_1_1/')
+        else:
+            article.title = request.POST.get('title')
+            article.content = request.POST.get('content')
+            article.save()
     context = {
-        'article':article,
-        'create':0,
+        'article': article,
+        'create': 0,
     }
     return render(request,'user/userart_detail.html',context)
 
-# 删除文章
-@login_decorator.login
-def article_delete(request,aid):
-    try:
-        article = Artical.objects.get(pk=int(aid))
-        article.delete()
-        data = {'ok': 1}
-    except Exception as e:
-        data = {'ok': 0}
-    return render(request,'user/articles.html')
 
 #创建文章
 @login_decorator.login

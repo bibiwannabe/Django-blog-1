@@ -16,4 +16,4 @@ urlpatterns = [
     url(r'^create/$',views.create_article),
     url(r'^create_handle/$',views.creat_handle),
     url(r'head/$',views.head),
-            ]+ static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+            ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

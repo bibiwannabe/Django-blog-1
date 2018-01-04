@@ -67,10 +67,12 @@ width:215px;
 	 <span>内容</span>
    <textarea  rows="25" cols="70" name="content" form="nov">{{ article.content }}
    </textarea>
+         <input style="display:none" name="delete" value="1">
    </div>
    <div class="buttons">
     <button type="submit" class="bu">保存</button>
-	<button  class="bu" id="san"  onClick="return false">删除</button>
+	<button  class="bu" id="san"  >删除</button>
+        {% csrf_token %}
 	</div>
 	<div class="times">
 	   <span>创建时间：{{article.createdate|date:"Y-m-d H:i:s" }}</span><br>
@@ -82,9 +84,22 @@ width:215px;
     <script type="text/javascript" src="http://script.game2.com/jquery-1.9.1.min.js?v=201512"></script>
     <script>
 	  $(document).ready(function(){
-	   $("#san").on("click",function(){
+	   $("#sans").on("click",function(){
 	     if(window.confirm('确认删除文章吗')){
-		      window.location.href="/user/articles_1/";
+	         $.ajax({
+		  type:"POST",
+		  url:'/user/userart_{{ article.id }}/',
+		  cache:false,
+          async:false,
+		  data:{
+		      'delete':'1',
+		  },
+		   success:function(result){
+		    alert("sjhj");
+           }
+		});
+		     // window.location.href="/user/articles_1_1/";
+
                  //alert("确定");
                  return true;
               }else{
